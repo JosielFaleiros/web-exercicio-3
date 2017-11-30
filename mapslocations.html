@@ -2,34 +2,70 @@
 <head>
 
   <title>Google Maps Multiple Markers</title>
-  <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
-</head>
-<body>
-  <div id="map" style="height: 100%; width: 100%;">
-  </div>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script type="text/javascript">
-  var locations = [
-    ['Bondi Beach', -23.18, -50.65738, 4],
-    ['Coogee Beach', -23.18216, -50.65074, 5]
-  ];
+  <!-- <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script> -->
+  <meta charset="utf-8">
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDzEPf6DtKWH2z-8N5pNFVICBB2wVq2bU&callback=initMap"
+  type="text/javascript"></script></head>
+  <body>
+    <div id="map" style="height: 100%; width: 100%;">
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+    var locations = [
+      [-23.18, -50.65738, 4],
+      [-23.18216, -50.65074, 5]
+    ];
+    var map;
+    var infowindow;
+    var i;
+    let marker = [];
+    function initMap() {
 
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 14,
-    center: new google.maps.LatLng(-23.18111111, -50.64666667),
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 14,
+        center: new google.maps.LatLng(-23.18111111, -50.64666667),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
 
-  var infowindow = new google.maps.InfoWindow();
+      infowindow = new google.maps.InfoWindow();
 
-  var marker, i;
+      $(document).ready(function () {
+        callTimeout();
 
-  for (i = 0; i < locations.length; i++) {
-    marker = new google.maps.Marker({
-      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-      map: map
-    });
-  }
-  </script>
-</body>
-</html>
+      })
+
+      function callTimeout() {
+        makerequest()
+        setTimeout(function(){
+          callTimeout()
+        }, 3000);
+      }
+
+      function makerequest() {
+        $.ajax({
+          url: "http://localhost:8080/positions.php",
+          method: 'get',
+          success: success,
+          dataType: 'json'
+        });
+        function success(data) {
+          for (i = 0; i < data.length; i++) {
+            console.log(data[i]);
+            if (marker[i]) {
+              marker[i].setPosition( new google.maps.LatLng(data[i].lat, data[i].lng) )
+            } else {
+              marker[i] = new google.maps.Marker({
+                position: new google.maps.LatLng(data[i].lat, data[i].lng),
+                map: map
+              });
+            }
+          }
+        }
+      }
+
+
+    }
+
+    </script>
+  </body>
+  </html>
