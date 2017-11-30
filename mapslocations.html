@@ -48,6 +48,32 @@
           success: success,
           dataType: 'json'
         });
+
+        var pinColor = "22FF33";
+        var pinImageGreen = new google.maps.MarkerImage(
+          "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+          new google.maps.Size(21, 34),
+          new google.maps.Point(0,0),
+          new google.maps.Point(10, 34)
+        );
+
+        pinColor = "FF2233";
+        var pinImageRed = new google.maps.MarkerImage(
+          "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+          new google.maps.Size(21, 34),
+          new google.maps.Point(0,0),
+          new google.maps.Point(10, 34)
+        );
+
+        pinColor = "2233FF";
+        var pinImageBlue = new google.maps.MarkerImage(
+          "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + pinColor,
+          new google.maps.Size(21, 34),
+          new google.maps.Point(0,0),
+          new google.maps.Point(10, 34)
+        );
+        pinimages = [pinImageRed, pinImageBlue, pinImageGreen]
+
         function success(data) {
           for (i = 0; i < data.length; i++) {
             console.log(data[i]);
@@ -56,7 +82,8 @@
             } else {
               marker[i] = new google.maps.Marker({
                 position: new google.maps.LatLng(data[i].lat, data[i].lng),
-                map: map
+                map: map,
+                icon: pinimages[i]
               });
             }
           }
