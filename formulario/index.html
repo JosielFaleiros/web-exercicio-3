@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width initial-scale=1">
+        <script src="script/jquery-3.2.1.min.js"></script>
+        <script src="script/index.js"></script>
+        <script src="script/CPF.min.js"></script>
+        <link rel="stylesheet" href="style/style250-480.css"/>
+        <link rel="stylesheet" href="style/style481-720.css"/>
+        <link rel="stylesheet" href="style/style.css">
+    </head>
+    <body>
+        <div id="container">
+            <form method="GET">
+                <label>Nome: </label><input name="nome" type="text">
+                <label>Sobrenome: </label><input name="sobrenome" type="text"> 
+                <label>CEP: </label><input name="cep" type="number">
+                <p class="msgerror" id="cepInvalido">Digite um CEP válido. Sem traço.</p>
+                <label>Rua: </label><input name="rua" type="text">
+                <label>Bairro: </label><input name="bairro" type="text">
+                <label>Cidade: </label><input name="cidade" type="text">
+                <label>UF: </label><input name="uf" type="text">
+                <label>N°: </label><input name="numero" type="number">
+                <label>Nasc: </label><input name="nascimento" type="date">               
+                <label>CPF: </label><input name="cpf" type="number">
+                <p class="msgerror" id="cpfInvalido">Digite um CPF válido. Sem traço ou ponto.</p> 
+                <input type="button" value="enviar" id="enviar">
+            </form>
+        </div>
+    </body>
+</html>
