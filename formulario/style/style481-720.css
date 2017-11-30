@@ -1,0 +1,33 @@
+@media (min-width: 481px) {
+    
+    #container {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 25px;
+    }
+    label {
+        display: flex;
+        width: 19%;
+        text-align: center;
+        font-size: 1.2em;
+    }
+    input {
+        display: flex;
+        width: 30%;
+        height: 35px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+        border: 1px solid #b3b2b2;
+        font-size: 1.2em;
+    }
+    p {
+        width: 30%;
+    }
+    .msgerror {
+        margin: 0px;
+        width: 30%;
+        margin-left: 19%;
+        font-size: 0.65em;
+    }
+
+}
